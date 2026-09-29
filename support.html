@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Threshold</title>
+<style>
+  :root {
+    --bg: #0F0E0A;
+    --surface: #252010;
+    --surface-raised: #332E1A;
+    --text: #FFFFFF;
+    --text-muted: #9A9080;
+    --text-faint: #6A6050;
+    --accent: #C9A227;
+    --accent-light: #E6C96A;
+    --accent-soft: rgba(201,162,39,0.14);
+    --border: #332E1A;
+    --font: "Courier New", Courier, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body { line-height: 1.6; }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: #0F0E0A; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+  nav.top { padding: 28px 0; border-bottom: 1px solid var(--border); }
+  nav.top .wrap { max-width: 1080px; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 12px; font-size: 20px; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; }
+  .brand .mark { width: 28px; height: 28px; display: block; }
+  nav.top a.back { font-size: 13px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; }
+  nav.top a.back:hover { color: var(--accent); }
+
+  header.hero { padding: 56px 0 40px; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 4px; margin-bottom: 28px;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  h1 {
+    font-weight: 400; letter-spacing: 0.02em;
+    font-size: clamp(30px, 5.5vw, 42px); line-height: 1.15;
+    max-width: 18ch;
+  }
+  .hero-sub { margin-top: 18px; font-size: 16px; line-height: 1.6; color: var(--text-muted); max-width: 56ch; }
+
+  section { padding: 36px 0; }
+  section.form-section { border-top: 1px solid var(--border); padding-top: 48px; }
+
+  .direct-contact {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 20px 24px; margin-bottom: 40px;
+  }
+  .direct-contact .glyph {
+    width: 40px; height: 40px; border-radius: 5px;
+    background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .direct-contact a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .direct-contact a:hover { text-decoration: underline; }
+  .direct-contact p { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+
+  .section-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  h2 { font-weight: 400; font-size: 22px; margin-bottom: 8px; letter-spacing: 0.02em; }
+  .form-dek { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
+
+  form { display: flex; flex-direction: column; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  label { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  input, select, textarea {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 13px 16px; color: var(--text); font-family: var(--font); font-size: 14px;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 140px; }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9080' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 15px 28px; border-radius: 6px; font-family: var(--font);
+    font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+    background: var(--accent); color: #0F0E0A; border: 1px solid var(--accent);
+    transition: transform 0.15s ease, background 0.15s ease;
+    align-self: flex-start;
+  }
+  .btn:hover { transform: translateY(-1px); background: var(--accent-light); }
+
+  #confirm { display: none; margin-top: 8px; font-size: 13px; color: var(--accent); }
+
+  .safety-note {
+    margin-top: 48px; padding: 22px 24px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--surface);
+  }
+  .safety-note h3 { font-weight: 400; font-size: 16px; margin-bottom: 8px; letter-spacing: 0.02em; }
+  .safety-note p { color: var(--text-muted); font-size: 13px; }
+  .safety-note p a { color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--border); margin-top: 56px;
+    padding: 28px 0 48px; color: var(--text-faint); font-size: 12px;
+    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+  }
+  footer .wrap { max-width: 1080px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  footer a { text-decoration: none; letter-spacing: 0.04em; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="15" stroke="#C9A227" stroke-width="2"/>
+        <circle cx="24" cy="24" r="2.5" fill="#C9A227"/>
+        <line x1="24" y1="24" x2="34" y2="14" stroke="#C9A227" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Threshold
+    </div>
+    <a class="back" href="https://weather-what-if.vercel.app">← Back to Threshold</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Support</div>
+    <h1>We're here to help.</h1>
+    <p class="hero-sub">Questions, account issues, billing, or a bug report — reach the Threshold team directly below.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="direct-contact">
+      <div class="glyph">✉</div>
+      <div>
+        <a href="mailto:admin@thearc-hivesindex.com">admin@thearc-hivesindex.com</a>
+        <p>The fastest way to reach us directly, any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section">
+  <div class="wrap">
+    <div class="section-label">Contact form</div>
+    <h2>Send us a message</h2>
+    <p class="form-dek">Fill this out and we'll open a pre-filled email to send from your own inbox.</p>
+
+    <form id="support-form" onsubmit="return sendSupportEmail(event)">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Your email</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="field">
+        <label for="category">What's this about?</label>
+        <select id="category">
+          <option>Account or login issue</option>
+          <option>Billing or subscription</option>
+          <option>Bug or technical issue</option>
+          <option>Weather data question</option>
+          <option>General question</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" required></textarea>
+      </div>
+      <button type="submit" class="btn">Send message →</button>
+      <p id="confirm">Opening your email app with this pre-filled — send it from there to reach us.</p>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="safety-note">
+      <h3>Requesting data deletion</h3>
+      <p>To request deletion of your account and data, email us at <a href="mailto:admin@thearc-hivesindex.com">admin@thearc-hivesindex.com</a> or use the delete-account option linked in the footer below.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://weather-what-if.vercel.app">Home</a>
+    <a href="https://jherb91.github.io/threshold-legal/privacy-policy.html">Privacy Policy</a>
+    <a href="https://jherb91.github.io/threshold-legal/terms-of-service.html">Terms of Service</a>
+    <a href="https://jherb91.github.io/threshold-legal/delete-account.html">Delete Account</a>
+  </div>
+</footer>
+
+<script>
+  function sendSupportEmail(e) {
+    e.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var category = document.getElementById('category').value;
+    var message = document.getElementById('message').value.trim();
+
+    var subject = 'Threshold Support: ' + category;
+    var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+
+    window.location.href = 'mailto:admin@thearc-hivesindex.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    document.getElementById('confirm').style.display = 'block';
+    return false;
+  }
+</script>
+
+</body>
+</html>
